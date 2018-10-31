@@ -17,8 +17,8 @@ class UploadsController < ApplicationController
       return render json: failed_json, status: 422
     end
 
-    url    = params[:url]
-    file   = params[:file] || params[:files]&.first
+    url = params[:url]
+    file = params[:file] || params[:files]&.first
     pasted = params[:pasted] == "true"
     for_private_message = params[:for_private_message] == "true"
     is_api = is_api?
@@ -52,7 +52,7 @@ class UploadsController < ApplicationController
 
     if (params[:short_urls] && params[:short_urls].length > 0)
       PrettyText::Helpers.lookup_image_urls(params[:short_urls]).each do |short_url, url|
-        uploads << { short_url: short_url, url: url }
+        uploads << {short_url: short_url, url: url}
       end
     end
 
@@ -71,7 +71,7 @@ class UploadsController < ApplicationController
           filename: upload.original_filename,
           content_type: MiniMime.lookup_by_filename(upload.original_filename)&.content_type,
         }
-        opts[:disposition]   = "inline" if params[:inline]
+        opts[:disposition] = "inline" if params[:inline]
         opts[:disposition] ||= "attachment" unless FileHelper.is_supported_image?(upload.original_filename)
         send_file(Discourse.store.path_for(upload), opts)
       else
@@ -102,16 +102,14 @@ class UploadsController < ApplicationController
           max_file_size: maximum_upload_size,
           tmp_file_name: "discourse-upload-#{type}"
         ) rescue nil
-        #filename = File.basename(URI.parse(url).path)
         filename = 'ideagora_anonymise' + File.extname(URI.parse(url).path)
       end
     else
       tempfile = file.tempfile
-      #filename = file.original_filename
       filename = 'ideagora_anonymise' + File.extname(file.original_filename)
     end
 
-    return { errors: [I18n.t("upload.file_missing")] } if tempfile.nil?
+    return {errors: [I18n.t("upload.file_missing")]} if tempfile.nil?
 
     opts = {
       type: type,
@@ -125,7 +123,7 @@ class UploadsController < ApplicationController
       upload.update_columns(retain_hours: retain_hours) if retain_hours > 0
     end
 
-    upload.errors.empty? ? upload : { errors: upload.errors.values.flatten }
+    upload.errors.empty? ? upload : {errors: upload.errors.values.flatten}
   ensure
     tempfile&.close!
   end
