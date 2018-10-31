@@ -433,7 +433,7 @@ export function uploadLocation(url) {
 
 export function getUploadMarkdown(upload) {
   if (isAnImage(upload.original_filename)) {
-    const name = imageNameFromFileName(upload.original_filename);
+    const name = 'image';
     return `![${name}|${upload.thumbnail_width}x${
       upload.thumbnail_height
     }](${upload.short_url || upload.url})`;
