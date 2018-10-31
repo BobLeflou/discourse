@@ -102,11 +102,13 @@ class UploadsController < ApplicationController
           max_file_size: maximum_upload_size,
           tmp_file_name: "discourse-upload-#{type}"
         ) rescue nil
-        filename = File.basename(URI.parse(url).path)
+        #filename = File.basename(URI.parse(url).path)
+        filename = 'ideagora_anonymise' + File.extname(URI.parse(url).path)
       end
     else
       tempfile = file.tempfile
-      filename = file.original_filename
+      #filename = file.original_filename
+      filename = 'ideagora_anonymise' + File.extname(file.original_filename)
     end
 
     return { errors: [I18n.t("upload.file_missing")] } if tempfile.nil?
