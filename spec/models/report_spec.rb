@@ -973,4 +973,28 @@ describe Report do
       end
     end
   end
+
+  describe "report_suspicious_logins" do
+    let(:joffrey) { Fabricate(:user, username: "joffrey") }
+    let(:robin) { Fabricate(:user, username: "robin") }
+
+    context "with data" do
+      it "works" do
+        SiteSetting.verbose_auth_token_logging = true
+        freeze_time DateTime.parse('2017-03-01 12:00')
+
+        UserAuthToken.log(action: "suspicious", user_id: robin.id)
+        UserAuthToken.log(action: "suspicious", user_id: joffrey.id)
+        UserAuthToken.log(action: "suspicious", user_id: joffrey.id)
+
+        report = Report.find("suspicious_logins")
+
+        expect(report.data.length).to eq(3)
+        expect(report.data[0][:username]).to eq("robin")
+        expect(report.data[1][:username]).to eq("joffrey")
+        expect(report.data[2][:username]).to eq("joffrey")
+      end
+    end
+
+  end
 end

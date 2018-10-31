@@ -597,7 +597,7 @@ en:
       topics_entered: "topics entered"
       post_count: "# posts"
       confirm_delete_other_accounts: "Are you sure you want to delete these accounts?"
-      powered_by: "powered by <a href='https://ipinfo.io'>ipinfo.io</a>"
+      powered_by: "using <a href='https://maxmind.com'>MaxMindDB</a>"
       copied: "copied"
 
     user_fields:
@@ -688,7 +688,7 @@ en:
       watched_first_post_tags_instructions: "You will be notified of the first post in each new topic with these tags."
 
       muted_categories: "Muted"
-      muted_categories_instructions: "You will not be notified of anything about new topics in these categories, and they will not appear in latest."
+      muted_categories_instructions: "You will not be notified of anything about new topics in these categories, and they will not appear on the categories or latest pages."
       no_category_access: "As a moderator you have limited category access, save is disabled."
       delete_account: "Delete My Account"
       delete_account_confirm: "Are you sure you want to permanently delete your account? This action cannot be undone!"
@@ -2093,7 +2093,7 @@ en:
         upload: "Sorry, there was an error uploading that file. Please try again."
         file_too_large: "Sorry, that file is too big (maximum size is {{max_size_kb}}kb). Why not upload your large file to a cloud sharing service, then share the link?"
         too_many_uploads: "Sorry, you can only upload one file at a time."
-        too_many_dragged_and_dropped_files: "Sorry, you can only upload 10 files at a time."
+        too_many_dragged_and_dropped_files: "Sorry, you can only upload {{max}} files at a time."
         upload_not_authorized: "Sorry, the file you are trying to upload is not authorized (authorized extensions: {{authorized_extensions}})."
         image_upload_not_allowed_for_new_user: "Sorry, new users can not upload images."
         attachment_upload_not_allowed_for_new_user: "Sorry, new users can not upload attachments."
